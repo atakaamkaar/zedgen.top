@@ -94,9 +94,9 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-gradient-to-br from-sky-100 via-blue-50 to-gray-100 px-4 py-8 text-slate-900 sm:px-6">
+    <main className="flex min-h-screen items-center justify-center bg-linear-to-br from-sky-100 via-blue-50 to-gray-100 px-4 py-8 text-slate-900 sm:px-6">
       <section className="grid w-full max-w-5xl overflow-hidden rounded-3xl border border-white/40 bg-white/55 shadow-[0_8px_30px_rgba(0,0,0,0.08)] backdrop-blur-xl md:grid-cols-[1fr_1.1fr]">
-        <div className="bg-gradient-to-br from-sky-400 via-blue-400 to-blue-600 p-7 text-white sm:p-8 md:p-10">
+        <div className="bg-linear-to-br from-sky-400 via-blue-400 to-blue-600 p-7 text-white sm:p-8 md:p-10">
           <div className="flex h-full min-h-80 flex-col justify-between gap-10">
             <div>
               <p className="inline-flex rounded-full border border-white/30 bg-white/20 px-4 py-1 text-sm font-semibold backdrop-blur-md">
@@ -150,7 +150,7 @@ export default function LoginPage() {
               </h2>
 
               <p className="mx-auto mt-4 max-w-sm text-sm leading-7 text-gray-600">
-                Use an Iranian mobile number. Persian and English digits are
+                Use an Persian mobile number. Persian and English digits are
                 both accepted.
               </p>
             </div>
@@ -186,7 +186,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="h-14 w-full rounded-2xl bg-gradient-to-r from-sky-400 to-blue-500 px-5 font-bold text-white shadow-[0_8px_24px_rgba(14,165,233,0.24)] transition-all duration-300 hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-sky-200 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:scale-100"
+              className="h-14 w-full rounded-2xl bg-linear-to-r from-sky-400 to-blue-500 px-5 font-bold text-white shadow-[0_8px_24px_rgba(14,165,233,0.24)] transition-all duration-300 hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-sky-200 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:scale-100"
             >
               {loading ? "Sending OTP..." : "Send OTP"}
             </button>
