@@ -3,6 +3,27 @@ import Link from "next/link";
 import desktopComingSoon from "../../movies/v1 desktop background.jpg";
 import mobileComingSoon from "../../movies/v1 mobile background.jpg";
 
+const seasonButtons = [
+  { href: "/season0", label: "Z SEASON0" },
+  { href: "/season1", label: "Z SEASON1" },
+];
+
+function SeasonButtonGroup({ className = "" }: { className?: string }) {
+  return (
+    <div className={`mt-8 flex flex-col gap-3 sm:flex-row ${className}`}>
+      {seasonButtons.map((season) => (
+        <Link
+          key={season.href}
+          href={season.href}
+          className="inline-flex h-14 items-center justify-center rounded-xl bg-white px-7 text-base font-black text-slate-950 shadow-[0_18px_45px_rgba(14,165,233,0.28)] transition duration-200 hover:-translate-y-0.5 hover:bg-sky-50"
+        >
+          {season.label}
+        </Link>
+      ))}
+    </div>
+  );
+}
+
 export default function Home() {
   return (
     <main className="relative min-h-screen overflow-hidden bg-slate-950 text-white">
@@ -41,12 +62,17 @@ export default function Home() {
           <p className="mt-5 text-3xl font-black uppercase leading-tight text-sky-50 drop-shadow-[0_6px_20px_rgba(0,0,0,0.35)] lg:text-4xl">
             We built something different.
           </p>
+
+          <SeasonButtonGroup />
+
+          {/* Hidden until COLAABRATE v1 / Z-Identity Scan is final.
           <Link
             href="/login"
             className="mt-8 inline-flex h-14 items-center justify-center rounded-xl bg-white px-7 text-base font-black text-slate-950 shadow-[0_18px_45px_rgba(14,165,233,0.28)] transition duration-200 hover:-translate-y-0.5 hover:bg-sky-50"
           >
             Continue with OTP
           </Link>
+          */}
         </div>
 
         {/* Mobile + Right Side */}
@@ -69,12 +95,16 @@ export default function Home() {
             We built something different.
           </p>
 
+          <SeasonButtonGroup className="sm:hidden" />
+
+          {/* Hidden until COLAABRATE v1 / Z-Identity Scan is final.
           <Link
             href="/login"
             className="mt-8 inline-flex h-14 items-center justify-center rounded-xl bg-white px-7 text-base font-black text-slate-950 shadow-[0_18px_45px_rgba(14,165,233,0.28)] transition duration-200 hover:-translate-y-0.5 hover:bg-sky-50 sm:hidden"
           >
             Continue with OTP
           </Link>
+          */}
         </div>
       </section>
     </main>
