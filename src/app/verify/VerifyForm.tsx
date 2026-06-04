@@ -38,11 +38,16 @@ export default function VerifyForm({ initialPhone }: VerifyFormProps) {
   const [resending, setResending] = useState(false);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
-  const maskedPhone = initialPhone
-    ? `${initialPhone.slice(0, 4)} ${initialPhone.slice(4, 7)} ${initialPhone.slice(7)}`
+  const phone =
+    initialPhone ||
+    (typeof window !== "undefined"
+      ? sessionStorage.getItem("surveyPhone") || ""
+      : "");
+  const maskedPhone = phone
+    ? `${phone.slice(0, 4)} ${phone.slice(4, 7)} ${phone.slice(7)}`
     : "";
 
-  const handleVerifyOtp = (e: React.FormEvent) => {
+  const handleVerifyOtp = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     setMessage("");
@@ -54,15 +59,35 @@ export default function VerifyForm({ initialPhone }: VerifyFormProps) {
       return;
     }
 
-    if (!/^\d{4,8}$/.test(cleanOtp)) {
-      setError("OTP must be 4 to 8 digits.");
+    if (!/^\d{4}$/.test(cleanOtp)) {
+      setError("OTP must be 4 digits.");
       return;
     }
 
     try {
       setLoading(true);
-      sessionStorage.setItem("surveyOtpVerified", "true");
-      window.location.href = "/survey";
+      const response = await fetch("/api/verify-otp", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          phone,
+          otp: cleanOtp,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        sessionStorage.setItem("surveyOtpVerified", "true");
+        window.location.href = "/success";
+      } else {
+        setError(data.message || "OTP verification failed.");
+      }
+    } catch (error) {
+      console.error(error);
+      setError("OTP verification failed.");
     } finally {
       setLoading(false);
     }
@@ -72,7 +97,7 @@ export default function VerifyForm({ initialPhone }: VerifyFormProps) {
     setError("");
     setMessage("");
 
-    if (!initialPhone) {
+    if (!phone) {
       setError("Please go back and enter your phone number first.");
       return;
     }
@@ -82,11 +107,13 @@ export default function VerifyForm({ initialPhone }: VerifyFormProps) {
 
       const response = await fetch("/api/send-otp", {
         method: "POST",
+        cache: "no-store",
         headers: {
+          "Cache-Control": "no-cache",
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          phone: initialPhone,
+          phone,
         }),
       });
 
@@ -136,10 +163,10 @@ export default function VerifyForm({ initialPhone }: VerifyFormProps) {
               type="text"
               inputMode="numeric"
               autoComplete="one-time-code"
-              placeholder="123456"
+              placeholder="1234"
               value={otp}
               onChange={(e) => setOtp(e.target.value.replace(/\D/g, ""))}
-              maxLength={8}
+              maxLength={4}
               required
               className="h-16 w-full rounded-2xl border border-gray-200 bg-white/70 px-4 text-center text-3xl font-semibold tracking-[0.35em] text-slate-900 shadow-sm outline-none transition-all duration-300 placeholder:text-gray-400 focus:border-sky-400 focus:ring-4 focus:ring-sky-200"
             />

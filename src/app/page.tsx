@@ -6,6 +6,7 @@ import mobileComingSoon from "../../movies/v1 mobile background.jpg";
 const seasonButtons = [
   { href: "/season0", label: "Z SEASON0" },
   { href: "/season1", label: "Z SEASON1" },
+  { href: "https://survey.porsline.ir/s/XuWiZEMV", label: "Collaboration" },
 ];
 
 function SeasonButtonGroup({ className = "" }: { className?: string }) {
@@ -65,14 +66,12 @@ export default function Home() {
 
           <SeasonButtonGroup />
 
-          {/* Hidden until COLAABRATE v1 / Z-Identity Scan is final.
           <Link
             href="/login"
             className="mt-8 inline-flex h-14 items-center justify-center rounded-xl bg-white px-7 text-base font-black text-slate-950 shadow-[0_18px_45px_rgba(14,165,233,0.28)] transition duration-200 hover:-translate-y-0.5 hover:bg-sky-50"
           >
-            Continue with OTP
+            Log in
           </Link>
-          */}
         </div>
 
         {/* Mobile + Right Side */}
@@ -97,14 +96,12 @@ export default function Home() {
 
           <SeasonButtonGroup className="sm:hidden" />
 
-          {/* Hidden until COLAABRATE v1 / Z-Identity Scan is final.
           <Link
             href="/login"
             className="mt-8 inline-flex h-14 items-center justify-center rounded-xl bg-white px-7 text-base font-black text-slate-950 shadow-[0_18px_45px_rgba(14,165,233,0.28)] transition duration-200 hover:-translate-y-0.5 hover:bg-sky-50 sm:hidden"
           >
-            Continue with OTP
+            Log in
           </Link>
-          */}
         </div>
       </section>
     </main>
