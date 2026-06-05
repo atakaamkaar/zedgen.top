@@ -4,12 +4,13 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import cardImage from "../../../z Images/bazargani kart.jpg";
 
+
 export default function SuccessPage() {
   const router = useRouter();
 
   function handleDownload() {
     window.setTimeout(() => {
-      router.push("/survey");
+      router.push("/");
     }, 700);
   }
 

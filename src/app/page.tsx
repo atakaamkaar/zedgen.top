@@ -16,7 +16,7 @@ function SeasonButtonGroup({ className = "" }: { className?: string }) {
         <Link
           key={season.href}
           href={season.href}
-          className="inline-flex h-14 items-center justify-center rounded-xl bg-white px-7 text-base font-black text-slate-950 shadow-[0_18px_45px_rgba(14,165,233,0.28)] transition duration-200 hover:-translate-y-0.5 hover:bg-sky-50"
+          className="inline-flex h-14 items-center justify-center rounded-xl bg-linear-to-r from-pink-100 via-sky-100 to-blue-200 px-7 text-base font-black text-slate-950 shadow-[0_18px_45px_rgba(14,165,233,0.28)] transition duration-200 hover:-translate-y-0.5 hover:from-pink-200 hover:via-sky-100 hover:to-blue-300"
         >
           {season.label}
         </Link>
@@ -65,13 +65,6 @@ export default function Home() {
           </p>
 
           <SeasonButtonGroup />
-
-          <Link
-            href="/login"
-            className="mt-8 inline-flex h-14 items-center justify-center rounded-xl bg-white px-7 text-base font-black text-slate-950 shadow-[0_18px_45px_rgba(14,165,233,0.28)] transition duration-200 hover:-translate-y-0.5 hover:bg-sky-50"
-          >
-            Log in
-          </Link>
         </div>
 
         {/* Mobile + Right Side */}
@@ -95,13 +88,6 @@ export default function Home() {
           </p>
 
           <SeasonButtonGroup className="sm:hidden" />
-
-          <Link
-            href="/login"
-            className="mt-8 inline-flex h-14 items-center justify-center rounded-xl bg-white px-7 text-base font-black text-slate-950 shadow-[0_18px_45px_rgba(14,165,233,0.28)] transition duration-200 hover:-translate-y-0.5 hover:bg-sky-50 sm:hidden"
-          >
-            Log in
-          </Link>
         </div>
       </section>
     </main>
