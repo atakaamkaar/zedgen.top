@@ -6,21 +6,29 @@ import mobileComingSoon from "../../movies/v1 mobile background.jpg";
 const seasonButtons = [
   { href: "/season0", label: "Z SEASON0" },
   { href: "/season1", label: "Z SEASON1" },
-  { href: "https://survey.porsline.ir/s/XuWiZEMV", label: "Collaboration" },
+  { href: "https://survey.porsline.ir/s/XuWiZEMV", label: "Enter the game" },
 ];
 
 function SeasonButtonGroup({ className = "" }: { className?: string }) {
   return (
     <div className={`mt-8 flex flex-col gap-3 sm:flex-row ${className}`}>
-      {seasonButtons.map((season) => (
-        <Link
-          key={season.href}
-          href={season.href}
-          className="inline-flex h-14 items-center justify-center rounded-xl bg-linear-to-r from-pink-100 via-sky-100 to-blue-200 px-7 text-base font-black text-slate-950 shadow-[0_18px_45px_rgba(14,165,233,0.28)] transition duration-200 hover:-translate-y-0.5 hover:from-pink-200 hover:via-sky-100 hover:to-blue-300"
-        >
-          {season.label}
-        </Link>
-      ))}
+      {seasonButtons.map((season) => {
+        const isEnterGame = season.label === "Enter the game";
+
+        return (
+          <Link
+            key={season.href}
+            href={season.href}
+            className={`inline-flex h-14 items-center justify-center rounded-xl px-7 text-base font-black transition duration-300 ${
+              isEnterGame
+                ? "bg-linear-to-r from-black via-purple-950 to-violet-700 text-white shadow-[0_20px_60px_rgba(88,28,135,0.55)] ring-1 ring-purple-400/40 hover:-translate-y-1 hover:scale-105 hover:from-purple-950 hover:via-black hover:to-fuchsia-600 hover:shadow-[0_28px_80px_rgba(168,85,247,0.6)] hover:ring-purple-300"
+                : "bg-linear-to-r from-pink-100 via-sky-100 to-blue-200 text-slate-950 shadow-[0_18px_45px_rgba(14,165,233,0.28)] hover:-translate-y-0.5 hover:from-pink-200 hover:via-sky-100 hover:to-blue-300"
+            }`}
+          >
+            {season.label}
+          </Link>
+        );
+      })}
     </div>
   );
 }
@@ -28,7 +36,6 @@ function SeasonButtonGroup({ className = "" }: { className?: string }) {
 export default function Home() {
   return (
     <main className="relative min-h-screen overflow-hidden bg-slate-950 text-white">
-      {/* Background Images */}
       <Image
         src={desktopComingSoon}
         alt=""
@@ -48,12 +55,9 @@ export default function Home() {
         className="object-cover object-center sm:hidden"
       />
 
-      {/* Overlay */}
       <div className="absolute inset-0 bg-linear-to-t from-slate-950/88 via-slate-950/18 to-slate-950/5 sm:bg-linear-to-l sm:from-slate-950/76 sm:via-slate-950/18 sm:to-slate-950/5" />
 
-      {/* Content Section */}
       <section className="relative z-10 flex min-h-screen items-end px-5 pb-9 pt-24 sm:grid sm:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)] sm:items-center sm:gap-8 sm:px-10 sm:pb-12 sm:pt-20 lg:px-16">
-        {/* Desktop Left Side */}
         <div className="hidden max-w-lg self-center sm:block">
           <p className="text-4xl font-black uppercase leading-tight text-white drop-shadow-[0_6px_20px_rgba(0,0,0,0.35)] lg:text-5xl">
             &ldquo;Coming soon&rdquo;
@@ -67,7 +71,6 @@ export default function Home() {
           <SeasonButtonGroup />
         </div>
 
-        {/* Mobile + Right Side */}
         <div className="w-full max-w-md text-left sm:ml-auto sm:max-w-xl sm:self-start sm:pt-10 sm:text-right lg:pt-4">
           <p className="text-xs font-bold uppercase tracking-[0.28em] text-sky-100 sm:text-sm">
             ZAD is warming up

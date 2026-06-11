@@ -111,8 +111,8 @@ export default function LoginPage() {
             </h1>
 
             <p className="mx-auto max-w-xs text-[15px] leading-8 text-slate-600">
-              شماره موبایل خود را وارد کنید تا کد یکبار مصرف برای شما ارسال
-              شود.
+              کارت اختصاصی خودت آماده شده... برای مشاهده، دانلود و ورود به دنیای
+              بی پایان ضد شماره‌ت رو ثبت کن
             </p>
           </div>
 
@@ -133,30 +133,29 @@ export default function LoginPage() {
             />
           </div>
 
-            {error ? (
-              <div className="rounded-2xl border border-rose-100 bg-rose-50 px-4 py-3 text-sm font-medium text-rose-700">
-                {error}
-              </div>
-            ) : null}
+          {error ? (
+            <div className="rounded-2xl border border-rose-100 bg-rose-50 px-4 py-3 text-sm font-medium text-rose-700">
+              {error}
+            </div>
+          ) : null}
 
-            {status ? (
-              <div className="rounded-2xl border border-sky-100 bg-sky-50 px-4 py-3 text-sm font-medium text-sky-800">
-                {status}
-              </div>
-            ) : null}
+          {status ? (
+            <div className="rounded-2xl border border-sky-100 bg-sky-50 px-4 py-3 text-sm font-medium text-sky-800">
+              {status}
+            </div>
+          ) : null}
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="h-14 w-full rounded-2xl bg-linear-to-r from-sky-400 to-blue-600 px-5 font-bold text-white shadow-[0_12px_30px_rgba(14,165,233,0.26)] transition-all duration-300 hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-sky-200 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
-            >
-              {loading ? "در حال ارسال کد..." : "ارسال کد ورود"}
-            </button>
+          <button
+            type="submit"
+            disabled={loading}
+            className="h-14 w-full rounded-2xl bg-linear-to-r from-sky-400 to-blue-600 px-5 font-bold text-white shadow-[0_12px_30px_rgba(14,165,233,0.26)] transition-all duration-300 hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-sky-200 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
+          >
+            {loading ? "در حال ارسال کد..." : "ارسال کد ورود"}
+          </button>
 
-            <p className="text-center text-xs leading-6 text-slate-500">
-              اگر پیامک را دریافت نکردید، در مرحله بعد می‌توانید دوباره کد
-              بگیرید.
-            </p>
+          <p className="text-center text-xs leading-6 text-slate-500">
+            اگر پیامک را دریافت نکردید، در مرحله بعد می‌توانید دوباره کد بگیرید.
+          </p>
         </form>
       </section>
     </main>
