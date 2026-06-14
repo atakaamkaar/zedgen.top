@@ -133,10 +133,10 @@ export default function VerifyForm({ initialPhone }: VerifyFormProps) {
   };
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-gradient-to-br from-sky-100 via-blue-50 to-gray-100 px-4 py-8 text-slate-900 sm:px-6">
+    <main className="flex min-h-screen items-center justify-center bg-linear-to-br from-sky-100 via-blue-50 to-gray-100 px-4 py-8 text-slate-900 sm:px-6">
       <section className="w-full max-w-lg rounded-3xl border border-white/40 bg-white/55 p-7 text-center shadow-[0_8px_30px_rgba(0,0,0,0.08)] backdrop-blur-xl sm:p-8">
         <div className="mb-8 text-center">
-          <div className="mx-auto grid size-14 place-items-center rounded-2xl bg-gradient-to-br from-sky-100 to-blue-100 text-2xl font-bold text-sky-700 shadow-sm">
+          <div className="mx-auto grid size-14 place-items-center rounded-2xl bg-linear-to-br from-sky-100 to-blue-100 text-2xl font-bold text-sky-700 shadow-sm">
             #
           </div>
 
@@ -188,7 +188,7 @@ export default function VerifyForm({ initialPhone }: VerifyFormProps) {
             <button
               type="submit"
               disabled={loading}
-              className="h-14 w-full rounded-2xl bg-gradient-to-r from-sky-400 to-blue-500 px-5 font-bold text-white shadow-[0_8px_24px_rgba(14,165,233,0.24)] transition-all duration-300 hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-sky-200 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:scale-100"
+              className="h-14 w-full rounded-2xl bg-linear-to-r from-sky-400 to-blue-500 px-5 font-bold text-white shadow-[0_8px_24px_rgba(14,165,233,0.24)] transition-all duration-300 hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-sky-200 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:scale-100"
             >
               {loading ? "Submitting..." : "Submit OTP"}
             </button>

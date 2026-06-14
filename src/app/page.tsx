@@ -35,7 +35,7 @@ function SeasonButtonGroup({ className = "" }: { className?: string }) {
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-slate-950 text-white">
+    <main className="relative min-h-screen overflow-hidden bg-slate-950 pt-64 text-white md:pt-64">
       <Image
         src={desktopComingSoon}
         alt=""
@@ -43,7 +43,7 @@ export default function Home() {
         priority
         sizes="100vw"
         className="hidden object-cover sm:block"
-        style={{ objectPosition: "center 30%" }}
+        style={{ objectPosition: "center 38%" }}
       />
 
       <Image
@@ -57,7 +57,7 @@ export default function Home() {
 
       <div className="absolute inset-0 bg-linear-to-t from-slate-950/88 via-slate-950/18 to-slate-950/5 sm:bg-linear-to-l sm:from-slate-950/76 sm:via-slate-950/18 sm:to-slate-950/5" />
 
-      <section className="relative z-10 flex min-h-screen items-end px-5 pb-9 pt-24 sm:grid sm:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)] sm:items-center sm:gap-8 sm:px-10 sm:pb-12 sm:pt-20 lg:px-16">
+      <section className="relative z-10 flex min-h-screen items-end px-5 pb-9 pt-24 sm:grid sm:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)] sm:items-center sm:gap-8 sm:px-10 sm:pb-12 sm:pt-32 lg:px-16 lg:pt-28">
         <div className="hidden max-w-lg self-center sm:block">
           <p className="text-4xl font-black uppercase leading-tight text-white drop-shadow-[0_6px_20px_rgba(0,0,0,0.35)] lg:text-5xl">
             &ldquo;Coming soon&rdquo;
