@@ -6,6 +6,8 @@ import cardImage from "../../../z Images/bazargani kart.jpg";
 import finalCarddesk from "../../../z Images/chdesk.jpg";
 import finalCardmob from "../../../z Images/chmob.jpg";
 
+import cardF from "../../../z Images/CARDF.png";
+
 export default function SuccessPage() {
   const router = useRouter();
 
@@ -34,7 +36,7 @@ export default function SuccessPage() {
 
         <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
           <Image
-            src={finalCardmob}
+            src={cardF}
             alt="کارت بازرگانی"
             className="h-auto w-full"
             priority
@@ -42,7 +44,7 @@ export default function SuccessPage() {
         </div>
 
         <a
-          href={finalCardmob.src}
+          href={cardF.src}
           download="bazargani-kart.jpg"
           onClick={handleDownload}
           className="inline-flex h-14 w-full items-center justify-center rounded-2xl bg-linear-to-r from-sky-400 to-blue-600 px-6 font-bold text-white shadow-[0_12px_30px_rgba(14,165,233,0.26)] transition-all duration-300 hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-sky-200"
