@@ -23,26 +23,13 @@ export default function DarkModeProvider({ children }: { children: ReactNode }) 
         style={{ opacity: isDark ? 0.45 : 0 }}
       />
 
-      {/* Toggle button */}
+      {/* Toggle button — compact icon-only pill */}
       <button
         onClick={() => setIsDark((v) => !v)}
         aria-label={isDark ? "Switch to day mode" : "Switch to night mode"}
-        style={{ height: 52 }}
-        className={`fixed bottom-5 left-5 z-90 flex items-center rounded-full cursor-pointer transition-all duration-300 overflow-hidden select-none active:scale-95 hover:scale-[1.03] ${isDark ? "bg-white shadow-[0_4px_24px_rgba(255,255,255,0.25)]" : "bg-black shadow-[0_4px_24px_rgba(0,0,0,0.45)]"}`}
+        className={`fixed bottom-6 left-5 z-50 flex size-9 items-center justify-center rounded-full cursor-pointer transition-all duration-300 select-none active:scale-95 hover:scale-110 ${isDark ? "bg-white shadow-[0_4px_16px_rgba(255,255,255,0.2)]" : "bg-black/70 shadow-[0_4px_16px_rgba(0,0,0,0.35)]"}`}
       >
-        {/* Icon circle */}
-        <div
-          className={`flex items-center justify-center rounded-full shrink-0 size-11 m-1 ${isDark ? "bg-black/8 ring-1 ring-black/10" : "bg-white/10 ring-1 ring-white/15"}`}
-        >
-          {isDark ? <SunIcon /> : <MoonIcon />}
-        </div>
-
-        {/* Label */}
-        <span
-          className={`pl-2 pr-6 text-[11px] font-black uppercase tracking-[0.22em] ${isDark ? "text-black" : "text-white"}`}
-        >
-          {isDark ? "Day Mode" : "Night Mode"}
-        </span>
+        {isDark ? <SunIcon /> : <MoonIcon />}
       </button>
     </>
   );

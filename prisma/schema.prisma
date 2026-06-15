@@ -24,3 +24,14 @@ model MagicToken {
   used      Boolean  @default(false)
   user      User     @relation(fields: [userId], references: [id])
 }
+
+model ZGameEntry {
+  id          String   @id @default(cuid())
+  fullName    String
+  phone       String
+  username    String
+  analysis    String
+  cardUrl     String?
+  formAnswers Json?
+  createdAt   DateTime @default(now())
+}

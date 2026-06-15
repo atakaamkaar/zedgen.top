@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import desktopComingSoon from "../../movies/v1 desktop background.jpg";
-import mobileComingSoon from "../../movies/v1 mobile background.jpg";
+import mobileComingSoon from "../../z Images/chmob.jpg";
+import Countdown from "../components/Countdown";
 
 const seasonButtons = [
   { href: "/season0", label: "Z SEASON0" },
@@ -35,7 +36,7 @@ function SeasonButtonGroup({ className = "" }: { className?: string }) {
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-slate-950 pt-64 text-white md:pt-64">
+    <main className="relative min-h-screen overflow-hidden bg-slate-950 pt-64 pb-24 text-white md:pt-64 md:pb-0">
       <Image
         src={desktopComingSoon}
         alt=""
@@ -59,11 +60,6 @@ export default function Home() {
 
       <section className="relative z-10 flex min-h-screen items-end px-5 pb-9 pt-24 sm:grid sm:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)] sm:items-center sm:gap-8 sm:px-10 sm:pb-12 sm:pt-32 lg:px-16 lg:pt-28">
         <div className="hidden max-w-lg self-center sm:block">
-          <p className="text-4xl font-black uppercase leading-tight text-white drop-shadow-[0_6px_20px_rgba(0,0,0,0.35)] lg:text-5xl">
-            &ldquo;Coming soon&rdquo;
-            <br />
-            is boring.
-          </p>
           <p className="mt-5 text-3xl font-black uppercase leading-tight text-sky-50 drop-shadow-[0_6px_20px_rgba(0,0,0,0.35)] lg:text-4xl">
             We built something different.
           </p>
@@ -76,19 +72,7 @@ export default function Home() {
             ZAD is warming up
           </p>
 
-          <h1 className="mt-4 text-4xl font-black uppercase leading-[0.95] text-white drop-shadow-[0_6px_24px_rgba(0,0,0,0.38)] sm:text-6xl lg:text-7xl">
-            You found us too early.
-          </h1>
-
-          <p className="mt-5 max-w-sm text-2xl font-black uppercase leading-tight text-white drop-shadow-[0_6px_20px_rgba(0,0,0,0.35)] sm:hidden">
-            &ldquo;Coming soon&rdquo;
-            <br />
-            is boring.
-          </p>
-
-          <p className="mt-5 max-w-sm text-xl font-black uppercase leading-tight text-sky-50 drop-shadow-[0_6px_20px_rgba(0,0,0,0.35)] sm:hidden">
-            We built something different.
-          </p>
+          <Countdown />
 
           <SeasonButtonGroup className="sm:hidden" />
         </div>
