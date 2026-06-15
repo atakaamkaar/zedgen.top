@@ -18,9 +18,20 @@ export default function LogoutButton() {
     <button
       onClick={handleLogout}
       disabled={loading}
-      className="w-full rounded-2xl border border-rose-200 bg-white px-5 py-3 text-sm font-semibold text-rose-600 shadow-sm transition hover:bg-rose-50 focus:outline-none focus:ring-4 focus:ring-rose-100 disabled:cursor-not-allowed disabled:opacity-60"
+      className="w-full flex items-center justify-center gap-2 rounded-xl border border-rose-500/20 bg-rose-500/8 px-5 py-3 text-sm font-black uppercase tracking-[0.14em] text-rose-400 transition-all hover:bg-rose-500/15 hover:border-rose-500/30 hover:text-rose-300 disabled:cursor-not-allowed disabled:opacity-50"
     >
-      {loading ? "Signing out…" : "Sign out"}
+      {loading ? (
+        "Signing out…"
+      ) : (
+        <>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+            <polyline points="16 17 21 12 16 7" />
+            <line x1="21" y1="12" x2="9" y2="12" />
+          </svg>
+          Sign Out
+        </>
+      )}
     </button>
   );
 }

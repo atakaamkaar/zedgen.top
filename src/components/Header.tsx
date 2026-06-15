@@ -3,6 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { useCart } from "@/context/CartContext";
+import CartDrawer from "@/components/CartDrawer";
 
 const navLeft = [
   { href: "/collab", label: "Contact Us" },
@@ -10,14 +12,15 @@ const navLeft = [
 ];
 
 const navRight = [
+  { href: "/store", label: "Store" },
   { href: "/login", label: "Login" },
-  { href: "#", label: "Future" },
 ];
 
 const navAll = [...navLeft, ...navRight];
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const { count, setIsOpen: openCart } = useCart();
 
   return (
     <>
@@ -46,22 +49,40 @@ export default function Header() {
               </span>
             </Link>
 
-            {/* Task 2: all nav items in one row, equal spacing, consistent separator */}
-            <div className="flex items-center">
-              {navAll.map((item, i) => (
-                <div key={item.href} className="flex items-center">
-                  {i > 0 && (
-                    <span className="mx-5 text-[5px] text-white/20 select-none">◆</span>
-                  )}
-                  {/* Task 4: refined nav link typography */}
-                  <Link
-                    href={item.href}
-                    className="text-[10.5px] font-bold uppercase tracking-[0.22em] text-white/60 transition-colors duration-200 hover:text-white"
-                  >
-                    {item.label}
-                  </Link>
-                </div>
-              ))}
+            <div className="flex items-center gap-3">
+              <div className="flex items-center">
+                {navAll.map((item, i) => (
+                  <div key={item.href} className="flex items-center">
+                    {i > 0 && (
+                      <span className="mx-5 text-[5px] text-white/20 select-none">◆</span>
+                    )}
+                    <Link
+                      href={item.href}
+                      className="text-[10.5px] font-bold uppercase tracking-[0.22em] text-white/60 transition-colors duration-200 hover:text-white"
+                    >
+                      {item.label}
+                    </Link>
+                  </div>
+                ))}
+              </div>
+
+              {/* Cart icon */}
+              <button
+                onClick={() => openCart(true)}
+                aria-label="Open cart"
+                className="relative ml-3 flex items-center justify-center size-9 rounded-xl border border-white/15 bg-white/8 text-white/60 transition-colors hover:bg-white/15 hover:text-white"
+              >
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="9" cy="21" r="1" />
+                  <circle cx="20" cy="21" r="1" />
+                  <path d="M1 1h4l2.68 13.39A2 2 0 0 0 9.66 16h9.72a2 2 0 0 0 1.96-1.61L23 6H6" />
+                </svg>
+                {count > 0 && (
+                  <span className="absolute -top-1.5 -right-1.5 flex items-center justify-center size-4 rounded-full bg-amber-400 text-[9px] font-black text-slate-950 leading-none">
+                    {count > 9 ? "9+" : count}
+                  </span>
+                )}
+              </button>
             </div>
           </nav>
 
@@ -73,15 +94,35 @@ export default function Header() {
               </div>
             </Link>
 
-            <button
-              onClick={() => setOpen(true)}
-              aria-label="Open navigation menu"
-              className="flex flex-col justify-center items-center gap-1.25 size-9 rounded-xl border border-white/15 bg-white/10 backdrop-blur-sm transition-colors hover:bg-white/18"
-            >
-              <span className="block h-[1.5px] w-4.5 rounded-full bg-white" />
-              <span className="block h-[1.5px] w-4.5 rounded-full bg-white" />
-              <span className="block h-[1.5px] w-4.5 rounded-full bg-white" />
-            </button>
+            <div className="flex items-center gap-2">
+              {/* Mobile cart icon */}
+              <button
+                onClick={() => openCart(true)}
+                aria-label="Open cart"
+                className="relative flex items-center justify-center size-9 rounded-xl border border-white/15 bg-white/10 text-white/60 transition-colors hover:bg-white/18 hover:text-white"
+              >
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="9" cy="21" r="1" />
+                  <circle cx="20" cy="21" r="1" />
+                  <path d="M1 1h4l2.68 13.39A2 2 0 0 0 9.66 16h9.72a2 2 0 0 0 1.96-1.61L23 6H6" />
+                </svg>
+                {count > 0 && (
+                  <span className="absolute -top-1.5 -right-1.5 flex items-center justify-center size-4 rounded-full bg-amber-400 text-[9px] font-black text-slate-950 leading-none">
+                    {count > 9 ? "9+" : count}
+                  </span>
+                )}
+              </button>
+
+              <button
+                onClick={() => setOpen(true)}
+                aria-label="Open navigation menu"
+                className="flex flex-col justify-center items-center gap-1.25 size-9 rounded-xl border border-white/15 bg-white/10 backdrop-blur-sm transition-colors hover:bg-white/18"
+              >
+                <span className="block h-[1.5px] w-4.5 rounded-full bg-white" />
+                <span className="block h-[1.5px] w-4.5 rounded-full bg-white" />
+                <span className="block h-[1.5px] w-4.5 rounded-full bg-white" />
+              </button>
+            </div>
           </div>
 
         </div>
@@ -145,6 +186,9 @@ export default function Header() {
           </div>
         </div>
       </div>
+
+      {/* Cart Drawer */}
+      <CartDrawer />
     </>
   );
 }

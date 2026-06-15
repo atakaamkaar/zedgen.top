@@ -17,10 +17,10 @@ function compute(): TimeLeft {
 }
 
 const UNITS: { key: keyof TimeLeft; label: string }[] = [
-  { key: "days", label: "روز" },
-  { key: "hours", label: "ساعت" },
-  { key: "minutes", label: "دقیقه" },
-  { key: "seconds", label: "ثانیه" },
+  { key: "days", label: "DAYS" },
+  { key: "hours", label: "HRS" },
+  { key: "minutes", label: "MIN" },
+  { key: "seconds", label: "SEC" },
 ];
 
 export default function Countdown() {
