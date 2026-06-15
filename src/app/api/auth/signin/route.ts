@@ -99,20 +99,26 @@ export async function POST(req: Request) {
       phone?: string;
     };
 
-    if (!name || !email || !phone) {
+    if (!email) {
       return NextResponse.json(
-        { success: false, message: "name, email, and phone are required" },
+        { success: false, message: "email is required" },
         { status: 400 },
       );
     }
 
-    // Step 1 & 2: upsert user
-    console.log("[auth/signin] step 1 — upserting user:", email);
-    const user = await prisma.user.upsert({
-      where: { email },
-      update: {},
-      create: { name, email, phone },
-    });
+    // Step 1: look up or create user
+    console.log("[auth/signin] step 1 — looking up user:", email);
+    let user = await prisma.user.findUnique({ where: { email } });
+
+    if (!user) {
+      if (!name || !phone) {
+        return NextResponse.json(
+          { success: false, message: "name and phone are required for new accounts" },
+          { status: 400 },
+        );
+      }
+      user = await prisma.user.create({ data: { name, email, phone } });
+    }
     console.log("[auth/signin] step 1 done — userId:", user.id);
 
     // Step 3: generate token
@@ -138,7 +144,7 @@ export async function POST(req: Request) {
       from: process.env.RESEND_FROM_EMAIL ?? "onboarding@resend.dev",
       to: email,
       subject: "Your sign-in link (expires in 15 minutes)",
-      html: buildMagicLinkEmail(magicUrl, name),
+      html: buildMagicLinkEmail(magicUrl, user.name),
     });
 
     if (resendError) {

@@ -24,18 +24,9 @@ export default async function DashboardPage() {
   return (
     <main className="relative min-h-screen bg-slate-950 text-white overflow-x-hidden">
 
-      {/* Background: radial glow + grid pattern */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_-10%,rgba(139,92,246,0.18),transparent_60%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_85%_80%,rgba(14,165,233,0.08),transparent_50%)]" />
-      <div
-        className="absolute inset-0 opacity-[0.028]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.6) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.6) 1px,transparent 1px)",
-          backgroundSize: "56px 56px",
-        }}
-      />
-      <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-slate-950/80 pointer-events-none" />
+      {/* Background: sky radial + diagonal gradient + grid — matches season0 */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(14,165,233,0.22),transparent_34%),linear-gradient(145deg,#020617_0%,#0f172a_50%,#111827_100%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:38px_38px]" />
 
       <div className="relative z-10 max-w-3xl mx-auto px-5 md:px-8 pt-32 pb-24 space-y-8">
 
@@ -51,7 +42,7 @@ export default async function DashboardPage() {
         </div>
 
         {/* Profile card */}
-        <div className="rounded-2xl border border-white/10 bg-white/[0.05] backdrop-blur-xl shadow-[0_0_0_1px_rgba(255,255,255,0.04)_inset,0_24px_64px_rgba(0,0,0,0.4)] p-7">
+        <div className="rounded-2xl border border-white/10 bg-white/8 backdrop-blur shadow-[0_18px_45px_rgba(2,6,23,0.28)] p-7">
           <div className="flex items-center gap-3 mb-7">
             {/* Avatar initials */}
             <div className="flex items-center justify-center size-12 rounded-xl bg-linear-to-br from-purple-500/30 to-sky-500/30 border border-white/10 text-lg font-black text-white/80 shrink-0">
@@ -262,7 +253,7 @@ function ServiceCard({
   const c = accentMap[accent];
 
   return (
-    <div className="flex flex-col gap-4 rounded-2xl border border-white/8 bg-white/[0.04] p-5 hover:border-white/14 hover:bg-white/[0.07] hover:-translate-y-0.5 transition-all duration-200">
+    <div className="flex flex-col gap-4 rounded-2xl border border-white/10 bg-white/8 p-5 hover:border-white/18 hover:bg-white/10 hover:-translate-y-0.5 transition-all duration-200">
       <div className={`flex items-center justify-center size-10 rounded-xl border ${c.icon}`}>
         {icon}
       </div>
