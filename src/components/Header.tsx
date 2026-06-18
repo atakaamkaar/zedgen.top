@@ -8,7 +8,8 @@ import CartDrawer from "@/components/CartDrawer";
 
 const navLeft = [
   { href: "/collab", label: "Contact Us" },
-  { href: "/season0", label: "Tests" },
+  { href: "https://survey.porsline.ir/s/XuWiZEMV", label: "Tests" },
+  { href: "/contact", label: "Contact" },
 ];
 
 const navRight = [
@@ -17,6 +18,7 @@ const navRight = [
 ];
 
 const navAll = [...navLeft, ...navRight];
+const navMobile = [navRight[1], ...navLeft, navRight[0]];
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -26,14 +28,14 @@ export default function Header() {
     <>
       {/* Floating glass card header */}
       <header className="fixed top-0 left-0 right-0 z-50 px-4 pt-3 md:px-6 lg:px-10">
-        <div className="rounded-2xl border border-white/9 bg-white/7 px-5 py-3 shadow-[0_1px_0_rgba(255,255,255,0.06)_inset,0_6px_36px_rgba(0,0,0,0.36)] backdrop-blur-xl md:px-7 lg:px-9">
+        <div className="rounded-2xl border border-[#2a4a7f]/50 bg-[#1F3455]/70 px-5 py-3 shadow-[0_1px_0_rgba(255,255,255,0.06)_inset,0_6px_36px_rgba(0,0,0,0.36)] backdrop-blur-xl md:px-7 lg:px-9">
 
           {/* ── Desktop & Tablet ── */}
           <nav className="hidden md:flex items-center justify-between">
 
             {/* Task 1: Logo moved to the left */}
-            <Link href="/" className="group flex items-center gap-3 shrink-0">
-              <div className="size-9 lg:size-10 overflow-hidden rounded-xl ring-1 ring-white/20 shadow-[0_4px_20px_rgba(0,0,0,0.45)] transition-transform duration-200 group-hover:scale-105">
+            <Link href="/" className="group flex flex-col items-center gap-0.5 shrink-0">
+              <div className="size-7 lg:size-8 overflow-hidden rounded-xl ring-1 ring-white/20 shadow-[0_4px_20px_rgba(0,0,0,0.45)] transition-transform duration-200 group-hover:scale-105">
                 <Image
                   src="/logo.png"
                   alt="Z"
@@ -44,7 +46,7 @@ export default function Header() {
                 />
               </div>
               {/* Task 4: refined logo label */}
-              <span className="text-[9px] font-black uppercase tracking-[0.36em] text-white/40 transition-colors duration-200 group-hover:text-white/65">
+              <span className="text-[7px] font-black uppercase tracking-[0.36em] text-white/40 transition-colors duration-200 group-hover:text-white/65">
                 Z&thinsp;GAME
               </span>
             </Link>
@@ -158,7 +160,7 @@ export default function Header() {
           </div>
 
           <nav className="flex flex-col justify-center flex-1 px-8 gap-1">
-            {navAll.map((item, i) => (
+            {navMobile.map((item, i) => (
               <Link
                 key={item.href}
                 href={item.href}

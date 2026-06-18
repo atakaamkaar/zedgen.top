@@ -24,9 +24,9 @@ const artists = ["Dadar", "Caca", "Lucifer", "Sharif", "Papa", "Vruy", "Mani30ya
 
 export default function Season1Page() {
   return (
-    <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-slate-950 px-5 py-10 text-white">
+    <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-slate-950 px-5 py-10 pt-47.5 text-white md:pt-47.5">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(14,165,233,0.22),transparent_34%),linear-gradient(145deg,#020617_0%,#0f172a_50%,#111827_100%)]" />
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:38px_38px]" />
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-size-[38px_38px]" />
 
       <section className="relative z-10 flex w-full max-w-3xl flex-col items-center">
         <div className="w-full max-w-2xl">

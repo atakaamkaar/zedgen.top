@@ -229,7 +229,7 @@ const packages = [
       "30-Day Social Strategy",
     ],
     cta: "Choose Growth",
-    accent: "from-amber-500 to-yellow-400",
+    accent: "from-green-500 to-green-400",
     highlight: true,
   },
   {
@@ -309,7 +309,7 @@ function ServiceCard({ service }: { service: typeof services[0] }) {
   };
 
   return (
-    <div className="group relative flex flex-col gap-4 rounded-2xl border border-white/8 bg-white/[0.04] p-6 backdrop-blur-sm transition-all duration-300 hover:border-white/16 hover:bg-white/[0.07] hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,0,0,0.4)]">
+    <div className="group relative flex flex-col gap-4 rounded-2xl border border-white/8 bg-white/4 p-6 backdrop-blur-sm transition-all duration-300 hover:border-white/16 hover:bg-white/[0.07] hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,0,0,0.4)]">
       {/* Icon + category */}
       <div className="flex items-start justify-between">
         <div className="flex items-center justify-center size-11 rounded-xl bg-white/8 border border-white/10 text-white/70 group-hover:text-amber-400 transition-colors duration-300">
@@ -376,19 +376,19 @@ function PackageCard({ pkg }: { pkg: typeof packages[0] }) {
   return (
     <div className={`relative flex flex-col rounded-2xl border p-7 transition-all duration-300 hover:-translate-y-1 ${
       pkg.highlight
-        ? "border-amber-400/40 bg-linear-to-b from-amber-400/8 to-amber-400/3 shadow-[0_0_0_1px_rgba(245,158,11,0.15),0_20px_60px_rgba(245,158,11,0.15)]"
-        : "border-white/10 bg-white/[0.04] hover:border-white/18"
+        ? "border-green-400/40 bg-linear-to-b from-green-400/8 to-green-400/3 shadow-[0_0_0_1px_rgba(34,197,94,0.15),0_20px_60px_rgba(34,197,94,0.15)]"
+        : "border-white/10 bg-white/4 hover:border-white/18"
     }`}>
       {pkg.highlight && (
         <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-          <span className="px-4 py-1 rounded-full bg-amber-400 text-slate-950 text-[9px] font-black uppercase tracking-[0.2em] shadow-[0_4px_16px_rgba(245,158,11,0.45)]">
+          <span className="px-4 py-1 rounded-full bg-green-400 text-slate-950 text-[9px] font-black uppercase tracking-[0.2em] shadow-[0_4px_16px_rgba(34,197,94,0.45)]">
             Most Popular
           </span>
         </div>
       )}
 
       <div className="mb-4">
-        <p className={`text-[9px] font-black uppercase tracking-[0.28em] mb-1 ${pkg.highlight ? "text-amber-400" : "text-white/35"}`}>
+        <p className={`text-[9px] font-black uppercase tracking-[0.28em] mb-1 ${pkg.highlight ? "text-green-400" : "text-white/35"}`}>
           {pkg.range}
         </p>
         <h3 className="text-2xl font-black text-white">{pkg.name}</h3>
@@ -402,7 +402,7 @@ function PackageCard({ pkg }: { pkg: typeof packages[0] }) {
       <ul className="space-y-2.5 flex-1 mb-7">
         {pkg.features.map(f => (
           <li key={f} className="flex items-start gap-2.5">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" className={`shrink-0 mt-0.5 ${pkg.highlight ? "text-amber-400" : "text-white/40"}`}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" className={`shrink-0 mt-0.5 ${pkg.highlight ? "text-green-400" : "text-white/40"}`}>
               <polyline points="20 6 9 17 4 12" />
             </svg>
             <span className="text-xs text-white/60 leading-relaxed">{f}</span>
@@ -414,7 +414,7 @@ function PackageCard({ pkg }: { pkg: typeof packages[0] }) {
         onClick={handleAdd}
         className={`w-full py-3 rounded-xl text-sm font-black uppercase tracking-[0.14em] transition-all duration-200 ${
           pkg.highlight
-            ? "bg-linear-to-r from-amber-500 to-yellow-400 text-slate-950 shadow-[0_6px_24px_rgba(245,158,11,0.4)] hover:shadow-[0_10px_32px_rgba(245,158,11,0.55)] hover:-translate-y-0.5"
+            ? "bg-linear-to-r from-green-500 to-green-400 text-slate-950 shadow-[0_6px_24px_rgba(34,197,94,0.4)] hover:shadow-[0_10px_32px_rgba(34,197,94,0.55)] hover:-translate-y-0.5"
             : "bg-white/8 border border-white/12 text-white/70 hover:bg-white/14 hover:text-white"
         }`}
       >
@@ -603,7 +603,7 @@ export default function StorePage() {
                 desc: "Not satisfied? We revise until you are — or we refund you in full. Simple.",
               },
             ].map(item => (
-              <div key={item.title} className="flex flex-col items-start gap-4 p-6 rounded-2xl border border-white/8 bg-white/[0.03]">
+              <div key={item.title} className="flex flex-col items-start gap-4 p-6 rounded-2xl border border-white/8 bg-white/3">
                 <div className="flex items-center justify-center size-11 rounded-xl bg-amber-400/10 border border-amber-400/20 text-amber-400">
                   {item.icon}
                 </div>

@@ -46,3 +46,13 @@ export async function getSessionFromCookies(): Promise<SessionPayload | null> {
   if (!token) return null;
   return verifyToken(token);
 }
+
+/**
+ * Canonical helper for protected Server Components.
+ * Reads and verifies the session cookie; returns the payload or null.
+ *
+ * Usage:
+ *   const user = await getSessionUser();
+ *   if (!user) redirect("/login");
+ */
+export const getSessionUser = getSessionFromCookies;

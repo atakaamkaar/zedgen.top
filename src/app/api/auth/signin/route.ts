@@ -2,6 +2,7 @@ import crypto from "node:crypto";
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { rateLimit, getIp } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -72,6 +73,15 @@ function buildMagicLinkEmail(magicUrl: string, name: string): string {
 }
 
 export async function POST(req: Request) {
+  // ── Rate limit ───────────────────────────────────────────────────────────
+  const { allowed, retryAfterSecs } = rateLimit(getIp(req), "signin");
+  if (!allowed) {
+    return NextResponse.json(
+      { success: false, message: "Too many attempts. Please wait 15 minutes." },
+      { status: 429, headers: { "Retry-After": String(retryAfterSecs) } },
+    );
+  }
+
   // ── Env-var guard ────────────────────────────────────────────────────────
   const missingVars: string[] = [];
   if (!process.env.DATABASE_URL || process.env.DATABASE_URL.includes("USER:PASSWORD"))

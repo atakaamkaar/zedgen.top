@@ -20,11 +20,7 @@ function SeasonButtonGroup({ className = "" }: { className?: string }) {
           <Link
             key={season.href}
             href={season.href}
-            className={`inline-flex h-14 items-center justify-center rounded-xl px-7 text-base font-black transition duration-300 ${
-              isEnterGame
-                ? "bg-linear-to-r from-black via-purple-950 to-violet-700 text-white shadow-[0_20px_60px_rgba(88,28,135,0.55)] ring-1 ring-purple-400/40 hover:-translate-y-1 hover:scale-105 hover:from-purple-950 hover:via-black hover:to-fuchsia-600 hover:shadow-[0_28px_80px_rgba(168,85,247,0.6)] hover:ring-purple-300"
-                : "bg-linear-to-r from-pink-100 via-sky-100 to-blue-200 text-slate-950 shadow-[0_18px_45px_rgba(14,165,233,0.28)] hover:-translate-y-0.5 hover:from-pink-200 hover:via-sky-100 hover:to-blue-300"
-            }`}
+            className="inline-flex h-14 items-center justify-center rounded-xl px-7 text-base font-black transition duration-300 bg-linear-to-r from-pink-100 via-sky-100 to-blue-200 text-slate-950 shadow-[0_18px_45px_rgba(14,165,233,0.28)] hover:-translate-y-0.5 hover:from-pink-200 hover:via-sky-100 hover:to-blue-300"
           >
             {season.label}
           </Link>
@@ -36,29 +32,35 @@ function SeasonButtonGroup({ className = "" }: { className?: string }) {
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-slate-950 pt-64 pb-24 text-white md:pt-64 md:pb-0">
-      <Image
-        src={desktopComingSoon}
-        alt=""
-        fill
-        priority
-        sizes="100vw"
-        className="hidden object-cover sm:block"
-        style={{ objectPosition: "center 38%" }}
-      />
+    <main className="relative min-h-screen overflow-hidden bg-[#1F3960] text-white">
+      {/* Desktop background — starts 110px below top so the character is visible above the header */}
+      <div className="absolute inset-x-0 bottom-0 top-27.5 hidden sm:block">
+        <Image
+          src={desktopComingSoon}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+          style={{ objectPosition: "center 38%" }}
+        />
+      </div>
 
-      <Image
-        src={mobileComingSoon}
-        alt=""
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover object-center sm:hidden"
-      />
+      {/* Mobile background — same 110px offset */}
+      <div className="absolute inset-x-0 bottom-0 top-27.5 sm:hidden">
+        <Image
+          src={mobileComingSoon}
+          alt=""
+          fill
+          priority
+          sizes="(max-width: 640px) 100vw, 0vw"
+          className="object-cover object-center"
+        />
+      </div>
 
       <div className="absolute inset-0 bg-linear-to-t from-slate-950/88 via-slate-950/18 to-slate-950/5 sm:bg-linear-to-l sm:from-slate-950/76 sm:via-slate-950/18 sm:to-slate-950/5" />
 
-      <section className="relative z-10 flex min-h-screen items-end px-5 pb-9 pt-24 sm:grid sm:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)] sm:items-center sm:gap-8 sm:px-10 sm:pb-12 sm:pt-32 lg:px-16 lg:pt-28">
+      <section className="relative z-10 mt-27.5 flex min-h-screen items-end px-5 pb-9 pt-47.5 sm:grid sm:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)] sm:items-center sm:gap-8 sm:px-10 sm:pb-12 sm:pt-47.5 lg:px-16 lg:pt-47.5">
         <div className="hidden max-w-lg self-center sm:block">
           <p className="mt-5 text-3xl font-black uppercase leading-tight text-sky-50 drop-shadow-[0_6px_20px_rgba(0,0,0,0.35)] lg:text-4xl">
             We built something different.

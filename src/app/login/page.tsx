@@ -1,6 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
+import loginBg from "../../../z Images/mobbck.jpg";
 
 type Tab = "email" | "phone";
 type EmailStatus = "idle" | "loading" | "success" | "error";
@@ -9,11 +11,11 @@ type PhoneStep = "input" | "otp";
 type UserType = "new" | "existing" | null;
 
 const inputCls =
-  "h-12 w-full rounded-2xl border border-slate-200 bg-white px-4 text-slate-900 shadow-sm outline-none transition placeholder:text-slate-400 focus:border-sky-400 focus:ring-4 focus:ring-sky-100";
+  "h-12 w-full rounded-2xl border border-white/10 bg-white/8 px-4 text-white outline-none transition placeholder:text-white/30 focus:border-sky-500/60 focus:bg-white/12";
 const btnCls =
-  "mt-1 h-12 w-full rounded-2xl bg-linear-to-r from-sky-400 to-blue-600 font-bold text-white shadow-[0_8px_24px_rgba(14,165,233,0.28)] transition-all hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-sky-200 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0";
+  "mt-1 h-12 w-full rounded-2xl bg-linear-to-r from-sky-400 to-blue-600 font-bold text-white shadow-[0_8px_24px_rgba(14,165,233,0.28)] transition-all hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-sky-500/30 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0";
 const errCls =
-  "rounded-2xl border border-rose-100 bg-rose-50 px-4 py-3 text-sm font-medium text-rose-700";
+  "rounded-2xl border border-rose-500/20 bg-rose-500/10 px-4 py-3 text-sm font-medium text-rose-400";
 
 export default function LoginPage() {
   const [activeTab, setActiveTab] = useState<Tab>("email");
@@ -142,23 +144,26 @@ export default function LoginPage() {
   const showNewUserFields = userType !== "existing";
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-linear-to-br from-sky-100 via-blue-50 to-slate-100 px-4 py-12">
-      <div className="w-full max-w-md rounded-3xl border border-white/60 bg-white/80 p-8 shadow-[0_18px_60px_rgba(15,23,42,0.12)] backdrop-blur-xl">
+    <main className="relative flex min-h-screen items-center justify-center bg-slate-950 px-4 pb-12 pt-47.5 md:pt-47.5">
+      <Image src={loginBg} alt="" fill priority sizes="100vw" className="object-cover object-center" />
+      <div className="absolute inset-0 bg-slate-950/55" />
+
+      <div className="relative z-10 w-full max-w-md rounded-3xl border border-white/10 bg-white/8 p-8 shadow-[0_18px_60px_rgba(0,0,0,0.5)] backdrop-blur-xl">
 
         {emailStatus === "success" ? (
           /* ── Success state ── */
           <div className="flex flex-col items-center gap-4 py-6 text-center">
-            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-sky-100 text-3xl">
+            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-sky-500/20 text-3xl">
               ✉️
             </div>
-            <h2 className="text-xl font-bold text-slate-900">Check your email!</h2>
-            <p className="text-[15px] leading-7 text-slate-600">
+            <h2 className="text-xl font-bold text-white">Check your email!</h2>
+            <p className="text-[15px] leading-7 text-white/55">
               We sent a sign-in link to{" "}
-              <span className="font-semibold text-sky-600">{email}</span>.
+              <span className="font-semibold text-sky-400">{email}</span>.
               <br />
               It expires in 15 minutes.
             </p>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs text-white/30">
               Don&apos;t see it? Check your spam folder.
             </p>
           </div>
@@ -166,14 +171,14 @@ export default function LoginPage() {
           <>
             {/* ── Header ── */}
             <div className="mb-6 space-y-1">
-              <p className="text-sm font-bold text-sky-600">Secure sign-in</p>
-              <h1 className="text-2xl font-bold text-slate-900">
+              <p className="text-sm font-bold text-sky-400">Secure sign-in</p>
+              <h1 className="text-2xl font-bold text-white">
                 Sign in or create account
               </h1>
             </div>
 
             {/* ── Tab switcher ── */}
-            <div className="mb-6 flex rounded-2xl bg-slate-100 p-1">
+            <div className="mb-6 flex rounded-2xl bg-white/8 p-1">
               {(["email", "phone"] as const).map((tab) => (
                 <button
                   key={tab}
@@ -181,8 +186,8 @@ export default function LoginPage() {
                   onClick={() => switchTab(tab)}
                   className={`flex-1 rounded-xl py-2.5 text-sm font-semibold transition-all ${
                     activeTab === tab
-                      ? "bg-white text-slate-900 shadow-sm"
-                      : "text-slate-500 hover:text-slate-700"
+                      ? "bg-white/15 text-white shadow-sm"
+                      : "text-white/40 hover:text-white/70"
                   }`}
                 >
                   {tab === "email" ? "Email" : "Phone"}
@@ -193,7 +198,7 @@ export default function LoginPage() {
             {/* ── Email tab ── */}
             {activeTab === "email" && (
               <form onSubmit={handleEmailSubmit} className="space-y-5" noValidate>
-                <p className="text-sm leading-6 text-slate-500">
+                <p className="text-sm leading-6 text-white/45">
                   {userType === "existing"
                     ? "Welcome back! We'll send a sign-in link to your inbox."
                     : "Enter your details and we'll email you a magic link — no password needed."}
@@ -201,7 +206,7 @@ export default function LoginPage() {
 
                 {/* Email (always shown) */}
                 <div className="space-y-1.5">
-                  <label className="block text-sm font-semibold text-slate-700">
+                  <label className="block text-sm font-semibold text-white/60">
                     Email address
                   </label>
                   <div className="relative">
@@ -225,7 +230,7 @@ export default function LoginPage() {
                     )}
                   </div>
                   {userType === "existing" && (
-                    <p className="text-xs text-sky-600 font-medium">
+                    <p className="text-xs text-sky-400 font-medium">
                       We found your account.
                     </p>
                   )}
@@ -242,7 +247,7 @@ export default function LoginPage() {
                   className="space-y-5"
                 >
                   <div className="space-y-1.5">
-                    <label className="block text-sm font-semibold text-slate-700">
+                    <label className="block text-sm font-semibold text-white/60">
                       Full name
                     </label>
                     <input
@@ -257,7 +262,7 @@ export default function LoginPage() {
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="block text-sm font-semibold text-slate-700">
+                    <label className="block text-sm font-semibold text-white/60">
                       Phone number
                     </label>
                     <input
@@ -286,7 +291,7 @@ export default function LoginPage() {
                     : "Send me a sign-in link"}
                 </button>
 
-                <p className="text-center text-xs text-slate-400">
+                <p className="text-center text-xs text-white/30">
                   By continuing you agree to our terms of service.
                 </p>
               </form>
@@ -297,13 +302,13 @@ export default function LoginPage() {
               <>
                 {phoneStep === "input" ? (
                   <form onSubmit={handlePhoneSend} className="space-y-5" noValidate>
-                    <p className="text-sm leading-6 text-slate-500">
+                    <p className="text-sm leading-6 text-white/45">
                       Enter your registered phone number and we&apos;ll send a
                       one-time verification code.
                     </p>
 
                     <div className="space-y-1.5">
-                      <label className="block text-sm font-semibold text-slate-700">
+                      <label className="block text-sm font-semibold text-white/60">
                         Phone number
                       </label>
                       <input
@@ -331,22 +336,22 @@ export default function LoginPage() {
                         : "Send verification code"}
                     </button>
 
-                    <p className="text-center text-xs text-slate-400">
+                    <p className="text-center text-xs text-white/30">
                       By continuing you agree to our terms of service.
                     </p>
                   </form>
                 ) : (
                   <form onSubmit={handleOtpVerify} className="space-y-5" noValidate>
-                    <p className="text-sm leading-6 text-slate-500">
+                    <p className="text-sm leading-6 text-white/45">
                       We sent a 6-digit code to{" "}
-                      <span className="font-semibold text-slate-700">
+                      <span className="font-semibold text-white/80">
                         {phoneNumber}
                       </span>
                       . It expires in 5 minutes.
                     </p>
 
                     <div className="space-y-1.5">
-                      <label className="block text-sm font-semibold text-slate-700">
+                      <label className="block text-sm font-semibold text-white/60">
                         Verification code
                       </label>
                       <input
@@ -385,7 +390,7 @@ export default function LoginPage() {
                         setPhoneError("");
                         setPhoneStatus("idle");
                       }}
-                      className="w-full text-center text-sm text-slate-500 transition hover:text-slate-700"
+                      className="w-full text-center text-sm text-white/40 transition hover:text-white/70"
                     >
                       Didn&apos;t receive the code? Go back
                     </button>

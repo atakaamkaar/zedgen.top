@@ -184,7 +184,7 @@ export default function CollabPage() {
     <main className="relative min-h-screen bg-slate-950 text-white overflow-hidden flex items-center justify-center px-4 py-8">
 
       {/* Background glows */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(139,92,246,0.18),transparent_58%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(14,165,233,0.15),transparent_58%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_90%,rgba(14,165,233,0.08),transparent_50%)]" />
       <div
         className="absolute inset-0 opacity-[0.025]"
@@ -202,16 +202,16 @@ export default function CollabPage() {
         {/* Header: logo + progress */}
         <div className="mb-8 flex flex-col gap-3">
           <div className="flex items-center justify-between">
-            <p className="text-[10px] font-black uppercase tracking-[0.32em] text-purple-400">
+            <p className="text-[10px] font-black uppercase tracking-[0.32em] text-sky-400">
               Z GAME · Entry Form
             </p>
             <span className="text-[10px] font-black text-white/30 tabular-nums">
               {slide === 0 ? "intro" : `${slide} / ${TOTAL_SLIDES - 1}`}
             </span>
           </div>
-          <div className="h-[2px] w-full rounded-full bg-white/8 overflow-hidden">
+          <div className="h-0.5 w-full rounded-full bg-white/8 overflow-hidden">
             <div
-              className="h-full rounded-full bg-linear-to-r from-purple-500 to-sky-500 transition-all duration-500"
+              className="h-full rounded-full bg-linear-to-r from-sky-400 to-sky-600 transition-all duration-500"
               style={{ width: `${slide === 0 ? 0 : progress}%` }}
             />
           </div>
@@ -219,11 +219,11 @@ export default function CollabPage() {
 
         {/* Slide 0 — Intro */}
         {slide === 0 && (
-          <div className="rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-8 shadow-[0_24px_64px_rgba(0,0,0,0.5)]">
+          <div className="rounded-2xl border border-white/10 bg-white/4 backdrop-blur-xl p-8 shadow-[0_24px_64px_rgba(0,0,0,0.5)]">
             <div className="mb-8">
               <h1 className="text-3xl font-black leading-tight text-white mb-2">
                 Enter the<br />
-                <span className="bg-linear-to-r from-purple-400 via-sky-300 to-purple-400 bg-clip-text text-transparent">
+                <span className="bg-linear-to-r from-white via-sky-300 to-white bg-clip-text text-transparent">
                   Z Game
                 </span>
               </h1>
@@ -244,7 +244,7 @@ export default function CollabPage() {
                   onKeyDown={e => e.key === "Enter" && handleIntroNext()}
                   placeholder="Your name"
                   autoComplete="name"
-                  className="w-full h-12 px-4 rounded-xl border border-white/10 bg-white/6 text-sm text-white placeholder-white/20 outline-none focus:border-purple-500/50 focus:bg-white/8 transition-colors"
+                  className="w-full h-12 px-4 rounded-xl border border-white/10 bg-white/6 text-sm text-white placeholder-white/20 outline-none focus:border-sky-500/50 focus:bg-white/8 transition-colors"
                 />
               </div>
 
@@ -259,7 +259,7 @@ export default function CollabPage() {
                   onKeyDown={e => e.key === "Enter" && handleIntroNext()}
                   placeholder="09xxxxxxxxx"
                   autoComplete="tel"
-                  className="w-full h-12 px-4 rounded-xl border border-white/10 bg-white/6 text-sm text-white placeholder-white/20 outline-none focus:border-purple-500/50 focus:bg-white/8 transition-colors"
+                  className="w-full h-12 px-4 rounded-xl border border-white/10 bg-white/6 text-sm text-white placeholder-white/20 outline-none focus:border-sky-500/50 focus:bg-white/8 transition-colors"
                 />
               </div>
 
@@ -272,7 +272,7 @@ export default function CollabPage() {
 
               <button
                 onClick={handleIntroNext}
-                className="w-full h-12 rounded-xl bg-linear-to-r from-purple-500 to-sky-500 text-white text-sm font-black uppercase tracking-[0.15em] shadow-[0_8px_24px_rgba(139,92,246,0.35)] hover:shadow-[0_12px_32px_rgba(139,92,246,0.5)] hover:-translate-y-0.5 transition-all duration-200"
+                className="w-full h-12 rounded-xl bg-linear-to-r from-sky-500 to-sky-400 text-white text-sm font-black uppercase tracking-[0.15em] shadow-[0_8px_24px_rgba(14,165,233,0.35)] hover:shadow-[0_12px_32px_rgba(14,165,233,0.5)] hover:-translate-y-0.5 transition-all duration-200"
               >
                 Let's Go
                 <span className="ml-2">→</span>
@@ -283,11 +283,11 @@ export default function CollabPage() {
 
         {/* Slides 1-8 — Questions */}
         {slide > 0 && currentQ && (
-          <div className="rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-8 shadow-[0_24px_64px_rgba(0,0,0,0.5)]">
+          <div className="rounded-2xl border border-white/10 bg-white/4 backdrop-blur-xl p-8 shadow-[0_24px_64px_rgba(0,0,0,0.5)]">
             {/* Question header */}
             <div className="mb-7">
               <div className="flex items-center gap-2 mb-4">
-                <span className="flex items-center justify-center size-7 rounded-lg bg-purple-500/20 border border-purple-500/30 text-[11px] font-black text-purple-400">
+                <span className="flex items-center justify-center size-7 rounded-lg bg-sky-500/20 border border-sky-500/30 text-[11px] font-black text-sky-400">
                   {slide}
                 </span>
                 <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white/25">
@@ -308,12 +308,12 @@ export default function CollabPage() {
                     onClick={() => selectOption(option)}
                     className={`w-full text-left flex items-start gap-3 px-4 py-3.5 rounded-xl border text-sm font-bold leading-snug transition-all duration-150 ${
                       selected
-                        ? "border-purple-400/50 bg-purple-500/15 text-white shadow-[0_0_0_1px_rgba(139,92,246,0.25)]"
-                        : "border-white/8 bg-white/[0.03] text-white/55 hover:border-white/16 hover:bg-white/[0.07] hover:text-white/80"
+                        ? "border-sky-400/50 bg-sky-500/15 text-white shadow-[0_0_0_1px_rgba(14,165,233,0.25)]"
+                        : "border-white/8 bg-white/3 text-white/55 hover:border-white/16 hover:bg-white/[0.07] hover:text-white/80"
                     }`}
                   >
                     <span className={`shrink-0 flex items-center justify-center size-5 rounded-md border text-[10px] font-black mt-0.5 transition-colors ${
-                      selected ? "border-purple-400 bg-purple-500/30 text-purple-300" : "border-white/15 text-white/25"
+                      selected ? "border-sky-400 bg-sky-500/30 text-sky-300" : "border-white/15 text-white/25"
                     }`}>
                       {String.fromCharCode(65 + i)}
                     </span>
@@ -348,7 +348,7 @@ export default function CollabPage() {
                 className={`flex-1 h-12 rounded-xl text-sm font-black uppercase tracking-[0.15em] transition-all duration-200 flex items-center justify-center gap-2 ${
                   currentAnswer && !loading
                     ? isLastSlide
-                      ? "bg-linear-to-r from-purple-500 to-sky-500 text-white shadow-[0_8px_24px_rgba(139,92,246,0.35)] hover:shadow-[0_12px_32px_rgba(139,92,246,0.5)] hover:-translate-y-0.5"
+                      ? "bg-linear-to-r from-sky-500 to-sky-400 text-white shadow-[0_8px_24px_rgba(14,165,233,0.35)] hover:shadow-[0_12px_32px_rgba(14,165,233,0.5)] hover:-translate-y-0.5"
                       : "bg-white/8 border border-white/12 text-white hover:bg-white/14"
                     : "bg-white/4 border border-white/6 text-white/20 cursor-not-allowed"
                 }`}

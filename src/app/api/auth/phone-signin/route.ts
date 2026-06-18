@@ -1,11 +1,21 @@
 import crypto from "node:crypto";
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { rateLimit, getIp } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 export async function POST(req: Request) {
+  // ── Rate limit ───────────────────────────────────────────────────────────
+  const { allowed, retryAfterSecs } = rateLimit(getIp(req), "phone-signin");
+  if (!allowed) {
+    return NextResponse.json(
+      { success: false, message: "Too many attempts. Please wait 15 minutes." },
+      { status: 429, headers: { "Retry-After": String(retryAfterSecs) } },
+    );
+  }
+
   const body = await req.json();
   const { phone } = body as { phone?: string };
 

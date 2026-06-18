@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { cn } from "@/lib/cn";
 
 interface Message {
   id: number;
@@ -45,7 +46,10 @@ export default function SupportButton() {
     <>
       {/* Chat window */}
       <div
-        className={`fixed bottom-24 right-5 z-80 w-80 rounded-2xl shadow-2xl flex flex-col overflow-hidden bg-slate-900 border border-white/10 transition-all duration-300 origin-bottom-right ${open ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-90 pointer-events-none"}`}
+        className={cn(
+          "fixed bottom-24 right-5 z-80 w-80 rounded-2xl shadow-2xl flex flex-col overflow-hidden bg-slate-900 border border-white/10 transition-all duration-300 origin-bottom-right",
+          open ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-90 pointer-events-none"
+        )}
         style={{ maxHeight: "420px" }}
       >
         {/* Header */}
@@ -74,14 +78,15 @@ export default function SupportButton() {
           {messages.map((msg) => (
             <div
               key={msg.id}
-              className={`flex ${msg.from === "user" ? "justify-end" : "justify-start"}`}
+              className={cn("flex", msg.from === "user" ? "justify-end" : "justify-start")}
             >
               <div
-                className={`max-w-[75%] px-3 py-2 rounded-2xl text-[13px] leading-snug
-                  ${msg.from === "user"
+                className={cn(
+                  "max-w-[75%] px-3 py-2 rounded-2xl text-[13px] leading-snug",
+                  msg.from === "user"
                     ? "bg-blue-600 text-white rounded-br-sm"
                     : "bg-white/10 text-white/85 rounded-bl-sm"
-                  }`}
+                )}
               >
                 {msg.text}
               </div>
@@ -97,15 +102,13 @@ export default function SupportButton() {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && send()}
             placeholder="Type a message…"
-            className="flex-1 bg-white/8 border border-white/12 rounded-xl px-3 py-2 text-[13px] text-white placeholder-white/30
-              focus:outline-none focus:border-blue-500/60 transition-colors"
+            className="flex-1 bg-white/8 border border-white/12 rounded-xl px-3 py-2 text-[13px] text-white placeholder-white/30 focus:outline-none focus:border-blue-500/60 transition-colors"
           />
           <button
             onClick={send}
             disabled={!input.trim()}
             aria-label="Send message"
-            className="size-9 rounded-xl bg-blue-600 hover:bg-blue-500 disabled:opacity-40 disabled:cursor-not-allowed
-              flex items-center justify-center transition-colors shrink-0"
+            className="size-9 rounded-xl bg-blue-600 hover:bg-blue-500 disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center transition-colors shrink-0"
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <line x1="22" y1="2" x2="11" y2="13" />
@@ -119,7 +122,10 @@ export default function SupportButton() {
       <button
         onClick={() => setOpen((v) => !v)}
         aria-label="Open support chat"
-        className={`fixed bottom-5 right-5 z-80 size-14 rounded-full bg-blue-600 hover:bg-blue-500 shadow-[0_4px_24px_rgba(37,99,235,0.55)] flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95 ${open ? "rotate-20" : "rotate-0"}`}
+        className={cn(
+          "fixed bottom-5 right-5 z-80 size-14 rounded-full bg-blue-600 hover:bg-blue-500 shadow-[0_4px_24px_rgba(37,99,235,0.55)] flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95",
+          open ? "rotate-20" : "rotate-0"
+        )}
       >
         {open ? (
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round">

@@ -7,6 +7,12 @@ export const dynamic = "force-dynamic";
 
 const SESSION_COOKIE = "session";
 const JWT_EXPIRY_SECONDS = 7 * 24 * 60 * 60;
+const MAX_OTP_ATTEMPTS = 5;
+
+// Per-token wrong-attempt counter. Keyed by MagicToken.id.
+// In-memory is fine: tokens expire in 5 min; DB invalidation (used: true)
+// is the durable safety net across restarts / instances.
+const otpAttempts = new Map<string, number>();
 
 export async function POST(req: Request) {
   const body = await req.json();
@@ -27,26 +33,60 @@ export async function POST(req: Request) {
     );
   }
 
-  const record = await prisma.magicToken.findFirst({
+  // Look up the active token WITHOUT filtering by OTP value so we can
+  // track wrong guesses before the correct one is known.
+  // Expiry check: expiresAt > now (5-minute window set at issuance).
+  const activeToken = await prisma.magicToken.findFirst({
     where: {
       userId: user.id,
-      token: otp,
       used: false,
       expiresAt: { gt: new Date() },
     },
+    orderBy: { expiresAt: "desc" },
   });
 
-  if (!record) {
+  if (!activeToken) {
     return NextResponse.json(
-      { success: false, message: "Invalid or expired code. Please try again." },
+      { success: false, message: "No active code found. Please request a new one." },
       { status: 400 },
     );
   }
 
-  await prisma.magicToken.update({
-    where: { id: record.id },
-    data: { used: true },
-  });
+  // Guard: token already hit the limit (race-condition safety net — normally
+  // the token would be marked used and filtered out above).
+  const attempts = otpAttempts.get(activeToken.id) ?? 0;
+  if (attempts >= MAX_OTP_ATTEMPTS) {
+    await invalidate(activeToken.id);
+    otpAttempts.delete(activeToken.id);
+    console.warn(
+      `[phone-verify] BLOCKED — token ${activeToken.id} exceeded attempt limit — phone: ${phone} — ${new Date().toISOString()}`,
+    );
+    return tooManyAttempts();
+  }
+
+  // Wrong OTP
+  if (activeToken.token !== otp) {
+    const newAttempts = attempts + 1;
+    otpAttempts.set(activeToken.id, newAttempts);
+    console.warn(
+      `[phone-verify] wrong OTP attempt ${newAttempts}/${MAX_OTP_ATTEMPTS} — phone: ${phone} — ${new Date().toISOString()}`,
+    );
+
+    if (newAttempts >= MAX_OTP_ATTEMPTS) {
+      await invalidate(activeToken.id);
+      otpAttempts.delete(activeToken.id);
+      return tooManyAttempts();
+    }
+
+    return NextResponse.json(
+      { success: false, message: "Invalid code. Please try again." },
+      { status: 400 },
+    );
+  }
+
+  // Correct OTP — consume the token
+  otpAttempts.delete(activeToken.id);
+  await invalidate(activeToken.id);
 
   const secret = process.env.JWT_SECRET;
   if (!secret) {
@@ -75,4 +115,20 @@ export async function POST(req: Request) {
   });
 
   return response;
+}
+
+// ── Helpers ──────────────────────────────────────────────────────────────────
+
+function invalidate(tokenId: string) {
+  return prisma.magicToken.update({
+    where: { id: tokenId },
+    data: { used: true },
+  });
+}
+
+function tooManyAttempts() {
+  return NextResponse.json(
+    { success: false, message: "Too many wrong attempts. Request a new code." },
+    { status: 429 },
+  );
 }
